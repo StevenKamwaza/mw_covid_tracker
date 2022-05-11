@@ -19,13 +19,15 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import './App.css';
 import AppLiveGraph from './pages/AppLiveGraph/AppliveGraph';
+import HeaderFigures from './pages/Figures/HeaderFigures';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="#">
-        @chesteve
+        che-steve
+        <img src="./malawi.png" alt="flag" height="40" width={40}/>
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -116,6 +118,7 @@ function App() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
+              <img src="./malawi.png" alt="flag" height="40" width={40}/>
               Malawi Covid Tracker Dashboard
             </Typography>
             <IconButton color="inherit">
@@ -176,7 +179,7 @@ function App() {
                 <AppLiveGraph/>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              {/* Recent figures */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -186,9 +189,8 @@ function App() {
                     height: 240,
                   }}
                 >
-                  
-                  <h1>Hello there</h1>
-                  {/* <Deposits /> */}
+                                  
+                  <HeaderFigures/>
                 </Paper>
               </Grid>
               {/* Recent Orders */}
