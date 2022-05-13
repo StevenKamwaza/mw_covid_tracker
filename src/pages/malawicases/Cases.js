@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { LineChart, ComposedChart,Line, Area,Tooltip, XAxis, YAxis,CartesianGrid,Legend, Label, ResponsiveContainer } from 'recharts';
+import {  ComposedChart,Line, Area,Tooltip, XAxis, YAxis,CartesianGrid, ResponsiveContainer } from 'recharts';
 import { Grid, Paper, Typography } from '@mui/material';
 import Title from '../Figures/Title';
 
@@ -11,7 +11,15 @@ export default function Cases (){
 
     const [worldCases ,setworldCases] = useState([]);
     const [dcases, setDcases] = useState([]);
-    const [globalSumary, setglobal]= useState([]);
+    const [malawisumary, setglobal]= useState([]);
+
+
+    const getApiMalawi = async () => {
+        const response = await fetch('https://api.covid19api.com/summary')
+        .then((response) => response.json());
+        // update the state
+        setglobal(response.Countries);
+      };
 
     const getApiData = async () => {
         const response = await fetch('https://api.covid19api.com/dayone/country/malawi/status/confirmed/live')
@@ -31,8 +39,22 @@ export default function Cases (){
     useEffect(() => {
         getApiData();
         getDcases();
+        getApiMalawi();
       }, [])
-       
+     
+
+      //finding malawi
+      let data_object = {}
+      
+      malawisumary.map((item, key)=>{
+        if(item.CountryCode ==="MW"){
+            
+            data_object.totalConfirmed = item.TotalConfirmed;
+            data_object.newconfirmed = item.NewConfirmed;
+            data_object.totalDeaths = item.TotalDeaths;
+            data_object.newDeaths = item.NewDeaths;
+        }
+      })
 
     return(
         <>
@@ -46,26 +68,25 @@ export default function Cases (){
                   }}
                 >
                                   
-                  <Title>World Case Summary</Title>
+                  <Title><img src="./malawi.png" alt="logo" height="40" width={40}/>Malawi Covid Cases</Title>
                   
-                  
-                  <Typography color="text.primary" component="p" variant="h6">
-                    New Confirmed: {globalSumary.NewConfirmed}
+                  <Typography color="text.primary" component="p" variant="h5">
+                    New Confirmed: {data_object.newconfirmed}
                   </Typography>
                   <Typography  color="text.primary" component="p" variant="h5">
-                     New Deaths: {globalSumary.NewDeaths}
+                     New Deaths: {data_object.newDeaths}
                   </Typography>
 
-                  <center><img src="./international.png" alt="logo" height="40" width={40}/> </center>
+                  
                   <div>
 
-                    <Typography  color="text.primary" component="p" variant="body1">
+                    <Typography  color="text.primary" component="p" variant="h6">
 
-                        Total Confirmed : {globalSumary.TotalConfirmed}
+                        Total Confirmed : {data_object.totalConfirmed}
                     </Typography>
                     <Typography  sx={{ flex: 1 }} color="text.primary" component="p" variant="h6">
 
-                        Total  Deaths   : {globalSumary.TotalDeaths}
+                        Total  Deaths   : {data_object.totalDeaths}
                     </Typography>
                     
                   </div>
@@ -79,6 +100,7 @@ export default function Cases (){
                     flexDirection: 'column',
                     height: 240,
                 }}>
+                    <Title>Recovered Cases </Title>
                     <ResponsiveContainer>
                         <ComposedChart
                         data={dcases}
@@ -99,14 +121,14 @@ export default function Cases (){
                             <Line
                                 isAnimationActive={false}
                                 type="monotone"
-                                dataKey="Confirmed"
+                                dataKey="Recovered"
                                 strokeWidth={2}
                                 stroke={theme.palette.primary.main}
                                 dot={false}
                             />
-                            <Area type="monotone" dataKey="Confirmed" fill="#8884d8" stroke="#8884d8" />
+                            <Area type="monotone" dataKey="Recovered" fill="#8884d8" stroke="#8884d8" />
                             <Tooltip/>
-                            <Legend/>
+                            
                         </ComposedChart>
                     </ResponsiveContainer>
 
@@ -120,6 +142,7 @@ export default function Cases (){
                     flexDirection: 'column',
                     height: 240,
                 }}>
+                    <Title>Recorded Cases</Title>
                     <ResponsiveContainer>
                         <ComposedChart
                         data={worldCases}
@@ -147,7 +170,48 @@ export default function Cases (){
                             />
                             <Area type="monotone" dataKey="Cases" fill="#8884d8" stroke="#8884d8" />
                             <Tooltip/>
-                            <Legend/>
+                            
+                        </ComposedChart>
+                    </ResponsiveContainer>
+
+                </Paper>
+            </Grid>
+            <Grid item xs ={12} md = {8} lg ={3} >
+                <Paper sx ={{
+                    p:2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                }}>
+                    <Title>Deaths Cases</Title>
+                    <ResponsiveContainer>
+                        <ComposedChart
+                        data={dcases}
+                        margin={{
+                            top: 16,
+                            right: 16,
+                            bottom: 0,
+                            left: 24,
+                        }}
+                        >
+                            <XAxis
+                                dataKey="Date"
+                                stroke={theme.palette.text.secondary}
+                                style={theme.typography.body2}
+                            />
+                            <YAxis/>
+                            <CartesianGrid strokeDasharray="1 3" />
+                            <Line
+                                isAnimationActive={false}
+                                type="monotone"
+                                dataKey="Deaths"
+                                strokeWidth={2}
+                                stroke={theme.palette.primary.main}
+                                dot={false}
+                            />
+                            <Area type="monotone" dataKey="Deaths" fill="#8884d8" stroke="#8884d8" />
+                            <Tooltip/>
+                            
                         </ComposedChart>
                     </ResponsiveContainer>
 

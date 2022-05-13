@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { LineChart, Line,Tooltip, XAxis, YAxis,CartesianGrid,Legend, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line,Tooltip, XAxis, YAxis,CartesianGrid,Legend, ResponsiveContainer } from 'recharts';
 import { Grid, Paper, Typography } from '@mui/material';
 import Title from '../Figures/Title';
 
@@ -23,7 +23,6 @@ export default function AppGraph (){
     useEffect(() => {
         getApiData();
       }, [])
-    console.log(globalSumary)
 
     
 

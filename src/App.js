@@ -19,9 +19,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import './App.css';
 import AppLiveGraph from './pages/AppLiveGraph/AppliveGraph';
-import HeaderFigures from './pages/Figures/HeaderFigures';
 import AppGraph from './pages/AppGraphs/AppGraphs';
-import Title from './pages/Figures/Title';
 import Cases from './pages/malawicases/Cases';
 
 function Copyright(props) {
@@ -173,7 +171,7 @@ function App() {
 
               {/* Chart */}
               <Cases/>
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={8} lg={12}>
                 
                 <Paper
                   sx={{
@@ -186,27 +184,9 @@ function App() {
                 <AppLiveGraph/>
                 </Paper>
               </Grid>
-              {/* Recent figures */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                                  
-                  <HeaderFigures/>
-                </Paper>
-              </Grid>
-
-              
-              
+             
               <AppGraph/>
-               
-              
-
+             
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
