@@ -2,30 +2,37 @@
 import * as React from 'react';
 import {useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { LineChart, Line,Tooltip, XAxis, YAxis,CartesianGrid,Legend, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, ComposedChart,Line, Area,Tooltip, XAxis, YAxis,CartesianGrid,Legend, Label, ResponsiveContainer } from 'recharts';
 import { Grid, Paper, Typography } from '@mui/material';
 import Title from '../Figures/Title';
 
-export default function AppGraph (){
+export default function Cases (){
     const theme = useTheme();
 
     const [worldCases ,setworldCases] = useState([]);
-    const [globalSumary, setGlobalSum] = useState([]);
+    const [dcases, setDcases] = useState([]);
+    const [globalSumary, setglobal]= useState([]);
 
     const getApiData = async () => {
-        const response = await fetch('https://api.covid19api.com/summary')
+        const response = await fetch('https://api.covid19api.com/dayone/country/malawi/status/confirmed/live')
         .then((response) => response.json());
         // update the state
-        setGlobalSum(response.Global)
-        setworldCases(response.Countries);
+        
+        setworldCases(response);
       };
 
+    const getDcases = async () => {
+        const response = await fetch('https://api.covid19api.com/total/dayone/country/malawi')
+        .then((response) => response.json());
+        // update the state
+        
+        setDcases(response);
+      };
     useEffect(() => {
         getApiData();
+        getDcases();
       }, [])
-    console.log(globalSumary)
-
-    
+       
 
     return(
         <>
@@ -64,8 +71,8 @@ export default function AppGraph (){
                   </div>
                 </Paper>
             </Grid>
-
-            <Grid item xs ={12} md = {8} lg ={9} >
+            
+            <Grid item xs ={12} md = {8} lg ={3} >
                 <Paper sx ={{
                     p:2,
                     display: 'flex',
@@ -73,7 +80,48 @@ export default function AppGraph (){
                     height: 240,
                 }}>
                     <ResponsiveContainer>
-                        <LineChart
+                        <ComposedChart
+                        data={dcases}
+                        margin={{
+                            top: 16,
+                            right: 16,
+                            bottom: 0,
+                            left: 24,
+                        }}
+                        >
+                            <XAxis
+                                dataKey="Date"
+                                stroke={theme.palette.text.secondary}
+                                style={theme.typography.body2}
+                            />
+                            <YAxis/>
+                            <CartesianGrid strokeDasharray="1 3" />
+                            <Line
+                                isAnimationActive={false}
+                                type="monotone"
+                                dataKey="Confirmed"
+                                strokeWidth={2}
+                                stroke={theme.palette.primary.main}
+                                dot={false}
+                            />
+                            <Area type="monotone" dataKey="Confirmed" fill="#8884d8" stroke="#8884d8" />
+                            <Tooltip/>
+                            <Legend/>
+                        </ComposedChart>
+                    </ResponsiveContainer>
+
+                </Paper>
+            </Grid>
+
+            <Grid item xs ={12} md = {8} lg ={3} >
+                <Paper sx ={{
+                    p:2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                }}>
+                    <ResponsiveContainer>
+                        <ComposedChart
                         data={worldCases}
                         margin={{
                             top: 16,
@@ -83,7 +131,7 @@ export default function AppGraph (){
                         }}
                         >
                             <XAxis
-                                dataKey="Country"
+                                dataKey="Date"
                                 stroke={theme.palette.text.secondary}
                                 style={theme.typography.body2}
                             />
@@ -92,39 +140,15 @@ export default function AppGraph (){
                             <Line
                                 isAnimationActive={false}
                                 type="monotone"
-                                dataKey="NewConfirmed"
-                                strokeWidth={2}
-                                stroke={theme.palette.secondary.main}
-                                dot={false}
-                            />
-                            <Line
-                                isAnimationActive={false}
-                                type="monotone"
-                                dataKey="TotalConfirmed"
+                                dataKey="Cases"
                                 strokeWidth={2}
                                 stroke={theme.palette.primary.main}
                                 dot={false}
                             />
-                            <Line
-                                isAnimationActive={false}
-                                type="monotone"
-                                dataKey="TotalRecovered"
-                                strokeWidth={2}
-                                stroke={theme.palette.success.main}
-                                dot={false}
-                            />
-                        
-                            <Line
-                                isAnimationActive={false}
-                                type="monotone"
-                                dataKey="TotalDeaths"
-                                strokeWidth={2}
-                                stroke={theme.palette.warning.main}
-                                dot={false}
-                            />
+                            <Area type="monotone" dataKey="Cases" fill="#8884d8" stroke="#8884d8" />
                             <Tooltip/>
                             <Legend/>
-                        </LineChart>
+                        </ComposedChart>
                     </ResponsiveContainer>
 
                 </Paper>

@@ -19,7 +19,6 @@ export default function AppLiveGraph (){
     useEffect(() => {
         getApiData();
       }, [])
-    console.log(mylive)
 
     return(
         <>
@@ -48,7 +47,7 @@ export default function AppLiveGraph (){
                             ...theme.typography.body1,
                         }}
                         >
-                        Active Cases
+                        Cases 
                         </Label>
                     </YAxis>
                     <CartesianGrid strokeDasharray="1 3" />
@@ -56,6 +55,7 @@ export default function AppLiveGraph (){
                         isAnimationActive={false}
                         type="monotone"
                         dataKey="Active"
+                        strokeWidth={2}
                         stroke={theme.palette.secondary.main}
                         dot={false}
                     />
@@ -63,6 +63,7 @@ export default function AppLiveGraph (){
                         isAnimationActive={false}
                         type="monotone"
                         dataKey="Confirmed"
+                        strokeWidth={2}
                         stroke={theme.palette.primary.main}
                         dot={false}
                     />
@@ -70,6 +71,7 @@ export default function AppLiveGraph (){
                         isAnimationActive={false}
                         type="monotone"
                         dataKey="Recovered"
+                        strokeWidth={2}
                         stroke={theme.palette.success.main}
                         dot={false}
                     />
@@ -78,6 +80,7 @@ export default function AppLiveGraph (){
                         isAnimationActive={false}
                         type="monotone"
                         dataKey="Deaths"
+                        strokeWidth={2}
                         stroke={theme.palette.warning.main}
                         dot={false}
                     />

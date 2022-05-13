@@ -20,6 +20,9 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import './App.css';
 import AppLiveGraph from './pages/AppLiveGraph/AppliveGraph';
 import HeaderFigures from './pages/Figures/HeaderFigures';
+import AppGraph from './pages/AppGraphs/AppGraphs';
+import Title from './pages/Figures/Title';
+import Cases from './pages/malawicases/Cases';
 
 function Copyright(props) {
   return (
@@ -98,7 +101,7 @@ function App() {
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
-          >
+            >
             <IconButton
               edge="start"
               color="inherit"
@@ -165,9 +168,13 @@ function App() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            
             <Grid container spacing={3}>
+
               {/* Chart */}
+              <Cases/>
               <Grid item xs={12} md={8} lg={9}>
+                
                 <Paper
                   sx={{
                     p: 2,
@@ -193,6 +200,13 @@ function App() {
                   <HeaderFigures/>
                 </Paper>
               </Grid>
+
+              
+              
+              <AppGraph/>
+               
+              
+
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
