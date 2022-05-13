@@ -1,0 +1,30 @@
+
+/* Collapse all borders separating each cell. Table takes up entire width of .app. Set gray shadow around table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0 5px 7px gray;
+  }
+  
+  /* Set shadow on just the table head */
+  thead {
+    box-shadow: 0px 0px 10px gray;
+  }
+  
+  /* Add some space around table heading. Align text to right and transform to uppercase */
+  
+  th {
+    padding: 1rem;
+    letter-spacing: 1px;
+    text-align: left;
+  }
+  
+  td {
+    padding: 0.5rem ;
+    font-size: 1rem;
+  }
+  
+  
+  tr:nth-child(even) {
+    background-color: #dee8f5;
+  }

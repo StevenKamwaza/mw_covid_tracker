@@ -3,6 +3,7 @@ import * as React from 'react';
 import {useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line,Tooltip, XAxis, YAxis,CartesianGrid,Legend, Label, ResponsiveContainer } from 'recharts';
+import Title from './Title';
 
 export default function AppLiveGraph (){
     const theme = useTheme();
@@ -22,6 +23,8 @@ export default function AppLiveGraph (){
 
     return(
         <>
+            
+            <Title>Malawi Cases Graph</Title>
             <ResponsiveContainer>
                 <LineChart
                 data={mylive}
@@ -32,6 +35,7 @@ export default function AppLiveGraph (){
                     left: 24,
                 }}
                 >
+                    
                     <XAxis
                         dataKey="Date"
                         stroke={theme.palette.text.secondary}

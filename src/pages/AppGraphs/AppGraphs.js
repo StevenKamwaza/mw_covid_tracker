@@ -42,7 +42,7 @@ export default function AppGraph (){
                   
                   
                   <Typography color="text.primary" component="p" variant="h6">
-                    New Confirmed: {globalSumary.NewConfirmed}
+                     New Confirmed: {globalSumary.NewConfirmed}
                   </Typography>
                   <Typography  color="text.primary" component="p" variant="h5">
                      New Deaths: {globalSumary.NewDeaths}

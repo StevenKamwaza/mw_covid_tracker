@@ -17,10 +17,12 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems, secondaryListItems } from './listItems';
 import './App.css';
 import AppLiveGraph from './pages/AppLiveGraph/AppliveGraph';
 import AppGraph from './pages/AppGraphs/AppGraphs';
 import Cases from './pages/malawicases/Cases';
+import AppTables from './pages/AppTables/AppTables';
 
 function Copyright(props) {
   return (
@@ -123,10 +125,9 @@ function App() {
               Malawi Covid Tracker Dashboard
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <Typography>New Cases</Typography>
-                <NotificationsIcon />
-              </Badge>
+                <Typography>Wear Mask</Typography>
+                <img src="./covi.png" alt="flag" height="40" width={40}/>
+              
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -146,9 +147,9 @@ function App() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <button>Home</button>
+            {mainListItems}
             <Divider sx={{ my: 1 }} />
-            {/* {secondaryListItems} */}
+            {secondaryListItems}
           </List>
         </Drawer>
 
@@ -187,11 +188,11 @@ function App() {
              
               <AppGraph/>
              
-              {/* Recent Orders */}
+              {/* All countries data */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <h1>hello box</h1>
-                  {/* <Orders /> */}
+                  
+                  <AppTables/>
                 </Paper>
               </Grid>
             </Grid>
